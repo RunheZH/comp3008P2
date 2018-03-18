@@ -1,4 +1,5 @@
 package util;
+import java.util.Random;
 
 public class RandomNumberGenerator {
     /**
@@ -7,7 +8,10 @@ public class RandomNumberGenerator {
      */
     public static int GenerateRandomNumber(){
         //TODO:
-        return -1;
+        Random rand = new Random();
+        int n = rand.nextInt(500)+1;
+        return n;
+        //return -1;
     }
 
 }
