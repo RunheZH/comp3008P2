@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class PasswordVerify extends HttpServlet{
+public class PasswordVerify extends BaseController{
     public String octal(HttpServletRequest req, HttpServletResponse res){
         //TODO
         return null;

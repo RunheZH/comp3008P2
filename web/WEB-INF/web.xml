@@ -4,14 +4,28 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
-    <!--
+    <filter>
+        <filter-name>BaseFilter</filter-name>
+        <filter-class>filter.BaseFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>BaseFilter</filter-name>
+        <url-pattern>/</url-pattern>
+    </filter-mapping>
     <servlet>
-        <servlet-name>Test</servlet-name>
-        <servlet-class>Test</servlet-class>
+        <servlet-name>PasswordRequestServlet</servlet-name>
+        <servlet-class>controller.PasswordRequest</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>Test</servlet-name>
-        <url-pattern>/test</url-pattern>
+        <servlet-name>PasswordRequestServlet</servlet-name>
+        <url-pattern>/pwreqservlet</url-pattern>
     </servlet-mapping>
-    -->
+    <servlet>
+        <servlet-name>PasswordVerifyServlet</servlet-name>
+        <servlet-class>controller.PasswordVerify</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PasswordVerifyServlet</servlet-name>
+        <url-pattern>/pwverservlet</url-pattern>
+    </servlet-mapping>
 </web-app>
