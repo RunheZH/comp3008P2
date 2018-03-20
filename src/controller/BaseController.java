@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 
 public abstract class BaseController extends HttpServlet {
+    protected static final String InvalidRequestUrl = "#/index.jsp?msg=Invalid Request";
     @Override
     public void service(HttpServletRequest req, HttpServletResponse res) {
         String inv_method = req.getSession().getAttribute("invMethod").toString();
