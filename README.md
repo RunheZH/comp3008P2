@@ -5,7 +5,7 @@
 
 1.Download tomcat(Version 8 or above)
 
-2.Download idea of Ultimate Version(You may skip this step, but you will tough time in the next few minutes. If you skip this step, go to step #4)
+2.Download idea Ultimate Version(You may skip this step, but you will tough time in the next few minutes. If you skip this step, go to step #4)
 
 3. Using idea:
 
