@@ -10,7 +10,7 @@
     </filter>
     <filter-mapping>
         <filter-name>BaseFilter</filter-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/*</url-pattern>
     </filter-mapping>
     <servlet>
         <servlet-name>PasswordRequestServlet</servlet-name>
@@ -18,7 +18,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>PasswordRequestServlet</servlet-name>
-        <url-pattern>/pwreqservlet</url-pattern>
+        <url-pattern>/requestServlet</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>PasswordVerifyServlet</servlet-name>
@@ -26,6 +26,14 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>PasswordVerifyServlet</servlet-name>
-        <url-pattern>/pwverservlet</url-pattern>
+        <url-pattern>/verifyServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>FlowServlet</servlet-name>
+        <servlet-class>controller.FlowServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FlowServlet</servlet-name>
+        <url-pattern>/flowServlet</url-pattern>
     </servlet-mapping>
 </web-app>
