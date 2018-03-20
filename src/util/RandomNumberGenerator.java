@@ -9,8 +9,15 @@ public class RandomNumberGenerator {
     public static int GenerateRandomNumber(){
         //TODO:
         Random rand = new Random();
-        int n = rand.nextInt(500)+1;
-        return n;
+        int result = 0;
+        int p = 1;
+        for (int i = 0; i < 7; i++){
+            int n = rand.nextInt(7);
+            result += p*n;
+            p *= 10;
+        }
+
+        return result;
         //return -1;
     }
 

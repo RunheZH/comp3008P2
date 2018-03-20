@@ -1,7 +1,7 @@
 package bean;
 
 public class Password {
-    private Scheme currentScheme;
+    private String currentScheme;
     private int password;
     private String password_representative;
     /**
@@ -13,11 +13,11 @@ public class Password {
     public Password(){
 
     }
-    public Scheme getCurrentScheme() {
+    public String getCurrentScheme() {
         return currentScheme;
     }
 
-    public void setCurrentScheme(Scheme currentScheme) {
+    public void setCurrentScheme(String currentScheme) {
         this.currentScheme = currentScheme;
     }
 
