@@ -11,10 +11,15 @@ public abstract class BaseController extends HttpServlet {
     protected static final String InvalidRequestUrl = "#/index.jsp?msg=Invalid Request";
     @Override
     public void service(HttpServletRequest req, HttpServletResponse res) {
+        //Class get the method that will be invoked from Session attribute
         String inv_method = req.getSession().getAttribute("invMethod").toString();
         try {
+            //invoke the method
             Method method = this.getClass().getMethod(inv_method, HttpServletRequest.class, HttpServletResponse.class);
+            //get the result
             String redirAddr = method.invoke(this, req, res).toString();
+
+            //if the uri has msg param(this is for server method redirect)
             if (req.getParameter("msg") != null) {
                 //only support when uri start with @
                 req.setAttribute("msg", req.getParameter("msg"));
@@ -23,10 +28,12 @@ public abstract class BaseController extends HttpServlet {
                 //server go to another method
                 res.sendRedirect(redirAddr.substring(1));
             } else if (redirAddr.startsWith("#")) {
+                //if the uri has msg param (this is for client page redirect)
                 //only support when uri with no prefix
                 req.setAttribute("msg", StringUtils.substringAfter(redirAddr, "msg="));
                 req.getRequestDispatcher(StringUtils.substringBetween(redirAddr, "#", "?")).forward(req, res);
             } else if (redirAddr.startsWith("^")) {
+                //direct out put the string
                 res.getWriter().print(StringUtils.substring(redirAddr, 1));
             } else {
                 //client go to another page
