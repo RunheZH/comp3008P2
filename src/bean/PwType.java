@@ -1,26 +1,16 @@
 package bean;
 
-public class PwType {
+import java.util.HashMap;
+import java.util.Map;
+
+public class PwType{
     public static String EMAIL = "Email";
     public static String BANKING = "Banking";
     public static String SHOPPING = "Shopping";
-    private String type;
-
-    public PwType() {
-
-    }
-
-    public int setType(String type){
-        if(!(type.equals(EMAIL)||
-            type.equals(BANKING)||
-            type.equals(SHOPPING))){
-            return -1;
-        }
-        this.type = type;
-        return 1;
-    }
-
-    public String getType() {
-        return type;
+    public static Map<Integer,String> TypeMapping = new HashMap<>();
+    static {
+        TypeMapping.put(1,EMAIL);
+        TypeMapping.put(2,BANKING);
+        TypeMapping.put(3,SHOPPING);
     }
 }
