@@ -62,6 +62,6 @@ public class PasswordConvertor {
         }
 
 
-        return null;
+        return original;
     }
 }
