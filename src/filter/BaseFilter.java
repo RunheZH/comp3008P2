@@ -9,39 +9,31 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class BaseFilter implements Filter{
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
 
     }
 
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        //todo
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse res = (HttpServletResponse) servletResponse;
         if(req.getSession().getAttribute("user") == null){
             //first time open web
             User user = new User();
+            req.getSession().setAttribute("user",user);
         }
         String contextpath = req.getContextPath();
         String uri = req.getRequestURI();
         uri = StringUtils.remove(uri,contextpath);
-        if(uri.startsWith("/submit_")){
-            //submit password
-            String servlet = "pwverservlet";
-            String method = StringUtils.substringAfterLast(uri,"_");
-            req.getSession().setAttribute("invMethod",method);
-            req.getRequestDispatcher("/"+servlet).forward(req,res);
-            return;
-        }
-        if (uri.startsWith("/getpass_")){
-            //getpassword
-            String servlet ="pwreqservlet";
+        if(uri.contains("_")){
+            //locate request handler
+            String servlet = StringUtils.substringBefore(uri,"_");
+            servlet+="Servlet";
             String method = StringUtils.substringAfter(uri,"_");
             req.getSession().setAttribute("invMethod",method);
-            req.getRequestDispatcher("/"+servlet).forward(req,res);
+            req.getRequestDispatcher(servlet).forward(req,res);
             return;
         }
         filterChain.doFilter(req,res);
-
     }
 
     public void destroy() {
