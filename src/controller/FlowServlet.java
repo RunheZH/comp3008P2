@@ -82,9 +82,9 @@ public class FlowServlet extends BaseController {
         int step = Integer.parseInt(req.getSession().getAttribute("nextstep").toString());
         if(step >3){
             //verify
-            returnul = "/verify_";
+            returnul = "@verify_";
         }else{
-            returnul = "/request_";
+            returnul = "@request_";
         }
         switch (target) {
             case Scheme.BINARY:
