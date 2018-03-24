@@ -13,6 +13,7 @@
     <%@include file="include/header.jsp"%>
 </head>
 <body>
+<div class = "container">
     <%@include file="include/SchemeChange.jsp"%>
     <c:if test="${scheme == 1}">
         <!-- octal -->
@@ -26,5 +27,6 @@
         <!--binary-->
         <%@include file="include/binary_template.jsp"%>
     </c:if>
+</div>
 </body>
 </html>
