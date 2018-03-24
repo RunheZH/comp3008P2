@@ -34,31 +34,12 @@ public class PasswordConvertor {
             original.setPassword_representative(updated_rep.toString());
 
         }else if(target_scheme.equals("BINARY")){
-
-            String new_rep = "";
-            String binary_digits = "1";
-
-            for(int i = 0; i < 7; i++){
-
-                //get value at each index starting from 0;
-                char target = curr_rep.charAt(i);
-                int value = Character.getNumericValue(target);
-
-                //add digits to the new_representative
-                for (int j = 0; j < value; j++) {
-                    new_rep += binary_digits;
-                }
-
-                //switch digit (1/0)
-                if (binary_digits.equals("1")){binary_digits = "0";}
-                else {binary_digits = "1";}
-
-            }
+            String new_rep = Integer.toBinaryString(curr_password);
             original.setPassword_representative(new_rep);
 
         }else{ //target_scheme.equals("OCTAL")
 
-            original.setPassword_representative(Integer.toString(original.getPassword()));
+            original.setPassword_representative(Integer.toString(curr_password));
         }
 
 
