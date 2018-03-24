@@ -21,6 +21,6 @@
         <h4>345</h4>
         <h4>456</h4>
     </div>
-    <a class="btn btn-primary" href="/flow_start" style="float: right;margin-right: 30px">Let's Start</a>
+    <a class="btn btn-primary" href="flow_start" style="float: right;margin-right: 30px">Let's Start</a>
 </body>
 </html>
