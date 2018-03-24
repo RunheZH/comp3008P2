@@ -3,7 +3,7 @@
     //music related
 
 </script>
-<c:if test="${nextstep == 1}">
+<c:if test="${nextstep <= 3}">
 
     <!-- request password -->
     <script>
@@ -25,7 +25,7 @@
 
 
 </c:if>
-<c:if test="${nextstep == 4}">
+<c:if test="${nextstep > 3}">
     <!-- verify password -->
 
 </c:if>
