@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class RandomNumberGenerator {
     /**
-     * Generate random 7 digit number, each digit range is 0-7
+     * Generate random 7 digit number, each digit range is 1-8
      * @return
      */
     public static int GenerateRandomNumber(){
@@ -13,7 +13,7 @@ public class RandomNumberGenerator {
         int p = 1;
         for (int i = 0; i < 7; i++){
             int n = rand.nextInt(7);
-            result += p*n;
+            result += p*(n+1);
             p *= 10;
         }
 

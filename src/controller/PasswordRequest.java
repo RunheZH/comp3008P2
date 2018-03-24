@@ -69,8 +69,8 @@ public class PasswordRequest extends BaseController {
         //else step = what param is
         int image_current_step = (req.getParameter("imagens")==null?1:Integer.parseInt(req.getParameter("imagens")));
         int image_size = 0;//how many images in the page
-        int row = 0;//high light image row
-        int col = 0;//high light image col
+        String row = "";//high light image row
+        String col = "";//high light image col
         /**
          * step->1
          * Initial password scheme(change pwd scheme -> image)
@@ -101,28 +101,31 @@ public class PasswordRequest extends BaseController {
 
 
 
-            req.setAttribute("imagens",++image_current_step);//set next step
-            row = password_s.charAt(0);
-            col = password_s.charAt(1);
+
+            row = Character.toString(password_s.charAt(0));
+            col = Character.toString(password_s.charAt(1));
             image_size = 64;
 
 
         }else if (image_current_step < 4){
             assert password != null;
+            image_size = 64;
             String password_s = Integer.toString(password.getPassword());
-            row = password_s.charAt((image_current_step-1)*2);
-            col = password_s.charAt((image_current_step-1)*2+1);
+            row = Character.toString(password_s.charAt((image_current_step-1)*2));
+            col = Character.toString(password_s.charAt((image_current_step-1)*2+1));
 
 
         }else if (image_current_step == 4){
             assert  password !=null;
             String password_s = Integer.toString(password.getPassword());
-            row = Integer.parseInt(password_s.charAt(6)+"")%4;
-            col = (Integer.parseInt(password_s.charAt(6)+"")-4)%4;
+            row = Integer.toString((password_s.charAt(6)-48)/4 +1);
+
+            col = Integer.toString((password_s.charAt(6)-48)%4);
             image_size = 8;
         }else if(image_current_step == 5){
             return "@flow_confirm";
         }
+        req.setAttribute("imagens",++image_current_step);//set next step
         req.setAttribute("scheme",2);//set scheme
         req.setAttribute("row",row);//set row
         req.setAttribute("col",col);//set col
