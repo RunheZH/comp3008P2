@@ -55,6 +55,7 @@ public class PasswordRequest extends BaseController {
         req.getSession().setAttribute("user",user);
         req.setAttribute("password",password.getPassword_representative());
         req.setAttribute("scheme",1);
+        req.setAttribute("type",PwType.TypeMapping.get(step));
         return "/passwordgen.jsp";
     }
 

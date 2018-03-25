@@ -24,6 +24,10 @@ public abstract class BaseController extends HttpServlet {
                 //only support when uri start with @
                 req.setAttribute("msg", req.getParameter("msg"));
             }
+            if (req.getAttribute("msg") != null) {
+                //only support when uri start with @
+                req.setAttribute("msg", req.getAttribute("msg"));
+            }
             if (redirAddr.startsWith("@")) {
                 //server go to another method
                 res.sendRedirect(redirAddr.substring(1));

@@ -4,6 +4,7 @@ import bean.Password;
 import bean.PwType;
 import bean.Scheme;
 import bean.User;
+import util.VerifyPassword;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,7 +47,9 @@ public class FlowServlet extends BaseController {
     public String next(HttpServletRequest req, HttpServletResponse res) {
         Integer step = Integer.parseInt(req.getSession().getAttribute("nextstep").toString());
         //todo
-        if (step > 3) {
+        if(step == 7) {
+            return "@flow_end";
+        }else if (step > 3) {
             //verify
             User user = (User) req.getSession().getAttribute("user");
             Random random = new Random();
@@ -54,16 +57,13 @@ public class FlowServlet extends BaseController {
             Password password = null;
             while (password == null) {
                 //bad style
-                r_num = random.nextInt(3);
-                password = user.getPassword(PwType.TypeMapping.get(step - r_num));
+                r_num = random.nextInt(3)+1;
+                password = user.getPassword(PwType.TypeMapping.get(r_num));
             }
-            user.removePassword(PwType.TypeMapping.get(step - r_num));
+            req.getSession().setAttribute("user",user);
             String scheme = password.getCurrentScheme();
-            return "@verify_" + scheme.toLowerCase();
-        } else if (step == 7) {
-            //log
-            return "@flow_end";
-        } else {
+            return "@verify_" + scheme.toLowerCase()+"?type="+PwType.TypeMapping.get(r_num);
+        }else {
             //request
             return "@request_octal";
         }
@@ -128,6 +128,18 @@ public class FlowServlet extends BaseController {
     public String reset(HttpServletRequest req, HttpServletResponse res) {
         //todo
         return null;
+    }
+    public String verify(HttpServletRequest req,HttpServletResponse res){
+        String user_password = req.getParameter("password");
+        User user = (User) req.getSession().getAttribute("user");
+        String password_type = req.getParameter("type");
+        Password password = user.getPassword(password_type);
+        user.removePassword(password_type);
+        if (password.getPassword_representative().equals(user_password)){
+            return "@flow_next?msg=Correct";
+        }else{
+            return "@flow_next?msg=Wrong";
+        }
     }
 
 }

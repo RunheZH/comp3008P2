@@ -14,6 +14,7 @@
 </head>
 <body>
 <div class = "container">
+    <label>Please remember your password for ${type} Account</label>
     <%@include file="include/SchemeChange.jsp"%>
     <c:if test="${scheme == 1}">
         <!-- octal -->
