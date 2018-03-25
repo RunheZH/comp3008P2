@@ -4,6 +4,7 @@ import bean.Password;
 import bean.Scheme;
 
 public class PasswordConvertor {
+
     public static Password convertPasswordTo(Password original,String target_scheme){
         //TODO#2
         //String curr_scheme = original.getCurrentScheme();
