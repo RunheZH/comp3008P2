@@ -13,16 +13,21 @@ public class Logger {
     static {
         openFile();
 
+
     }
     private static void openFile(){
         File file = new File("./Logging");
-
+        try {
+            writer = new FileWriter("./Logging", true);
+            bf_writer = new BufferedWriter(writer);
+        }catch (IOException e){
+            System.err.println(e.getMessage());
+        }
     }
     //format: "time","userid","scheme","password type","action","something else"
     public static synchronized void writeLog(User user, String scheme, String pwtype, String action, String data){
         try {
-            writer = new FileWriter("./Logging", true);
-            bf_writer = new BufferedWriter(writer);
+
             bf_writer.write("Time: " + System.currentTimeMillis());
             bf_writer.write("UserId: " + user.getUserid());
             bf_writer.write("Scheme: " + scheme);
@@ -32,10 +37,6 @@ public class Logger {
 
         }catch (IOException e){
             System.err.println(e.getMessage());
-        }finally {
-            if(bf_writer!=null){
-                bf_writer.close();
-            }
         }
     }
 
