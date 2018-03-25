@@ -17,15 +17,15 @@
     <%@include file="include/SchemeChange.jsp"%>
     <c:if test="${scheme == 1}">
         <!-- octal -->
-        <%@include file="include/octal_template.jsp"%>
+        <%@include file="include/octal_template_req.jsp"%>
     </c:if>
     <c:if test="${scheme == 2}">
         <!-- image-->
-        <%@include file="include/image_template.jsp"%>
+        <%@include file="include/image_template_req.jsp"%>
     </c:if>
     <c:if test="${scheme == 3}">
         <!--binary-->
-        <%@include file="include/binary_template.jsp"%>
+        <%@include file="include/binary_template_req.jsp"%>
     </c:if>
 </div>
 </body>
