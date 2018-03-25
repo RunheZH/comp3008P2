@@ -32,10 +32,6 @@ public class Logger {
 
         }catch (IOException e){
             System.err.println(e.getMessage());
-        }finally {
-            if(bf_writer!=null){
-                bf_writer.close();
-            }
         }
     }
 
