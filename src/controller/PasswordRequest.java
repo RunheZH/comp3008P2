@@ -36,8 +36,7 @@ public class PasswordRequest extends BaseController {
             if(!Scheme.verifyScheme(target_scheme)){
                 return InvalidRequestUrl;
             }
-            //todo uncomment when passwordConvertor done
-            //password = PasswordConvertor.convertPasswordTo(password,target_scheme);
+            password = PasswordConvertor.convertPasswordTo(password,target_scheme);
             user.addPassword(PwType.TypeMapping.get(step),password);
         }else{
             //first time create password
@@ -77,15 +76,17 @@ public class PasswordRequest extends BaseController {
          * Image size 8*8
          * Assign image row and col to request
          * set next step to request
-         * step->2
+         * step->2&3
          * Assign image row and col to request
          * Image size: 8*8
          * set next step to 3
          *
-         * step->3
+         * step->4
          * Image size 4*2
          * Set next step to confirm
          *
+         * step->5
+         * goto next Type
          */
         if(image_current_step == 1){
             //password initial
@@ -119,7 +120,6 @@ public class PasswordRequest extends BaseController {
             assert  password !=null;
             String password_s = Integer.toString(password.getPassword());
             row = Integer.toString((password_s.charAt(6)-48)/4 +1);
-
             col = Integer.toString((password_s.charAt(6)-48)%4);
             image_size = 8;
         }else if(image_current_step == 5){
@@ -134,8 +134,15 @@ public class PasswordRequest extends BaseController {
     }
 
     public String binary(HttpServletRequest req, HttpServletResponse res) {
-        //todo
-        return null;
+        User user = (User) req.getSession().getAttribute("user");
+        int step = Integer.parseInt(req.getSession().getAttribute("nextstep").toString());
+        Password password = user.getPassword(PwType.TypeMapping.get(step));
+        password = PasswordConvertor.convertPasswordTo(password,Scheme.BINARY);
+        user.addPassword(PwType.TypeMapping.get(step),password);
+        req.setAttribute("password",password.getPassword_representative());
+        req.setAttribute("scheme",3);
+        return "/passwordgen.jsp";
+
     }
 
 }
