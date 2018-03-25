@@ -13,7 +13,7 @@ public class PasswordConvertor {
         int curr_password = original.getPassword();
         String curr_rep = Integer.toString(curr_password);
 
-        if (target_scheme.equals("IMAGE")){
+        if (target_scheme.equals(Scheme.IMAGE)){
 
             StringBuilder updated_rep = new StringBuilder(curr_rep);
 
@@ -34,16 +34,16 @@ public class PasswordConvertor {
 
             original.setPassword_representative(updated_rep.toString());
 
-        }else if(target_scheme.equals("BINARY")){
+        }else if(target_scheme.equals(Scheme.BINARY)){
             String new_rep = Integer.toBinaryString(curr_password);
+            while (new_rep.length()<21){
+                new_rep = "0"+new_rep;
+            }
             original.setPassword_representative(new_rep);
 
         }else{ //target_scheme.equals("OCTAL")
-
-            original.setPassword_representative(Integer.toString(curr_password));
+            original.setPassword_representative(curr_rep);
         }
-
-
         return original;
     }
 }
