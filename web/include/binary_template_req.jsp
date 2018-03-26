@@ -1,8 +1,19 @@
 <div>
-    <script src="../js/textinput.js"></script>
+    <script>
+        function compare(data) {
+            if (data === '${password}') {
+                alert("Your password is correct");
+            } else {
+                alert("Your password is wrong");
+            }
+        }
+        function updatelength() {
+            $("#input_length").text($("#input_box").val().length)
+        }
+    </script>
     <label>Your password is:${password}</label>
     <div>
-        <label>You may enter this to following box <span><input id="input_box"></span></label>
+        <label>You may enter this to following box <span><input id="input_box" maxlength="21"></span></label>
         <button id="reenter_confirm" onclick="compare($('#input_box').val())">Confirm</button>
         <p><label>Your input length:<label id="input_length"></label></label></p>
     </div>
