@@ -13,7 +13,7 @@
     </script>
     <label>Your password is:${password}</label>
     <div>
-        <label>You may enter this to following box <span><input id="input_box"></span></label>
+        <label>You may enter this to following box <span><input id="input_box" maxlength="21"></span></label>
         <button id="reenter_confirm" onclick="compare($('#input_box').val())">Confirm</button>
         <p><label>Your input length:<label id="input_length"></label></label></p>
     </div>
