@@ -152,7 +152,7 @@
     <label>Please enter your ${PasswordType} password</label>
     <div>
         <label>You may enter this to following box <span><input id="input_box"
-                                                                onkeyup="playAudio($('#input_box').val());updatehref()" maxlength="7"></span></label>
+                                                                oninput="playAudio($('#input_box').val());updatehref()" maxlength="7"></span></label>
         <p><label>Your input length:<label id="input_length"></label></label></p>
 
     </div>
