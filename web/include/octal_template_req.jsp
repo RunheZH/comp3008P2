@@ -5,6 +5,8 @@
 </script>
 <!-- request password -->
 <script>
+    //var xhr = new Array(8);
+    //var buffer = new Array(8);
     var doBuffer;
     var reBuffer;
     var miBuffer;
@@ -14,9 +16,11 @@
     var tiBuffer;
     var hidoBuffer;
     var preSize=0;
+    //var url = ["/media/41.mp3", "/media/42.mp3", "/media/43.mp3", "/media/44.mp3", "/media/45.mp3", "/media/46.mp3", "/media/47.mp3", "/media/51.mp3"];
     var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     $(document).ready()
     {
+        //loadAudio();
         var doxhr = new XMLHttpRequest();
         doxhr.open('GET', "/media/41.mp3");
         doxhr.responseType = "arraybuffer";
@@ -98,6 +102,25 @@
         hidoxhr.send();
 
     }
+
+    // function  loadAudio(){
+    //     for (var i=0; i<2; i++){
+    //
+    //         xhr[i] = new XMLHttpRequest();
+    //         xhr[i].open('GET',url[i]);
+    //         xhr[i].responseType = "arraybuffer";
+    //         xhr[i].i = i;
+    //         xhr[i].onload = function(){
+    //             audioCtx.decodeAudioData(this.response, function (decodedData) {
+    //             console.log(this.response);
+    //                 buffer[this.i] = decodedData;
+    //             })
+    //         }
+    //         xhr[i].send();
+    //         //xhr.close();
+    //     }
+    // }
+
     function compare(data) {
         if (data === '${password}') {
             $("#input_box").val('');
@@ -161,7 +184,7 @@
 </script>
 <label>Your password is:${password}</label>
 <div>
-    <label>You may enter this to following box <span><input id="input_box" onkeyup="playAudio($('#input_box').val())" maxlength="7"></span></label>
+    <label>You may enter this to following box <span><input id="input_box" oninput="playAudio($('#input_box').val())" maxlength="7"></span></label>
     <button id="reenter_confirm" onclick="compare($('#input_box').val())">Confirm</button>
     <p><label>Your input length:<label id="input_length"></label></label></p>
 </div>
