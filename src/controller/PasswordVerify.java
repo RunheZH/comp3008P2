@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public class PasswordVerify extends BaseController{
     public String octal(HttpServletRequest req, HttpServletResponse res){
-        //TODO
         req.setAttribute("scheme",1);
         req.setAttribute("type",req.getParameter("type"));
         return "passwordverify.jsp";
@@ -43,9 +42,8 @@ public class PasswordVerify extends BaseController{
         return "passwordverify.jsp";
     }
     public String binary(HttpServletRequest req, HttpServletResponse res){
-        //todo
         req.setAttribute("scheme",3);
-        req.setAttribute("PasswordType",req.getParameter("type"));
+        req.setAttribute("type",req.getParameter("type"));
         return "passwordverify.jsp";
     }
 }

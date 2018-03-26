@@ -2,6 +2,7 @@ package filter;
 
 import bean.User;
 import org.apache.commons.lang3.StringUtils;
+import util.Logger;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +20,10 @@ public class BaseFilter implements Filter{
         if(req.getSession().getAttribute("user") == null){
             //first time open web
             User user = new User();
+            user.setUserid(User.uid++);
             req.getSession().setAttribute("user",user);
+            Logger.writeLog(user,"","","Login",req.getRemoteUser());
+
         }
         String contextpath = req.getContextPath();
         String uri = req.getRequestURI();

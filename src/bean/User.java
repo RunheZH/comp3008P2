@@ -3,6 +3,7 @@ package bean;
 import java.util.*;
 
 public class User {
+    public static int uid = 1;
     private int userid;
     private Hashtable<String,Password> password_list;
     private StringBuffer log;

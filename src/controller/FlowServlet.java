@@ -151,11 +151,10 @@ public class FlowServlet extends BaseController {
         user.removePassword(password_type);
         if (VerifyPassword.verify(password,user_password)){
             req.getSession().setAttribute("msg","Correct");
-            return "@flow_confirm";
         }else{
             req.getSession().setAttribute("msg","wrong");
-            return "@flow_confirm";
         }
+        return "@flow_confirm";
     }
 
 }
