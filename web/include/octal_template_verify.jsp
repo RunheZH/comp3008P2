@@ -1,5 +1,4 @@
 <div>
-    <script src="../js/textinput.js"></script>
     <script>
         var doBuffer;
         var reBuffer;
@@ -95,7 +94,8 @@
 
         }
         function updatehref() {
-            $("#link").attr("href", "/flow_verify?type=${PasswordType}&password=" + $("#input_box").val());
+            console.log("123");
+            $("#link").attr("href", "/flow_verify?type=${type}&password="+$("#input_box").val());
         }
         // function updatelength() {
         //     $("#input_length").text($("#input_box").val().length)
@@ -149,12 +149,12 @@
             }
         }
     </script>
-    <label>Please enter your ${PasswordType} password</label>
+    <label>Please enter your ${type} password</label>
     <div>
         <label>You may enter this to following box <span><input id="input_box"
-                                                                oninput="playAudio($('#input_box').val());updatehref()" maxlength="7"></span></label>
+                                                                oninput="updatehref();playAudio($('#input_box').val())" maxlength="7"></span></label>
         <p><label>Your input length:<label id="input_length"></label></label></p>
 
     </div>
-    <a id="link" class="btn btn-primary" href="/flow_verify?type=${PasswordType}&password=">Next</a>
+    <a id="link" class="btn btn-primary" href="/flow_verify?type=${type}&password=">Next</a>
 </div>

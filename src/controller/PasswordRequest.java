@@ -131,6 +131,7 @@ public class PasswordRequest extends BaseController {
         req.setAttribute("row",row);//set row
         req.setAttribute("col",col);//set col
         req.setAttribute("image_size",image_size);//set size
+        req.setAttribute("type",PwType.TypeMapping.get(step));
         return "/passwordgen.jsp";
     }
 
@@ -142,6 +143,7 @@ public class PasswordRequest extends BaseController {
         user.addPassword(PwType.TypeMapping.get(step),password);
         req.setAttribute("password",password.getPassword_representative());
         req.setAttribute("scheme",3);
+        req.setAttribute("type",PwType.TypeMapping.get(step));
         return "/passwordgen.jsp";
 
     }

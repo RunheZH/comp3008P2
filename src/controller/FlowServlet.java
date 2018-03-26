@@ -52,17 +52,23 @@ public class FlowServlet extends BaseController {
         }else if (step > 3) {
             //verify
             User user = (User) req.getSession().getAttribute("user");
-            Random random = new Random();
-            int r_num = -1;
-            Password password = null;
-            while (password == null) {
-                //bad style
-                r_num = random.nextInt(3)+1;
-                password = user.getPassword(PwType.TypeMapping.get(r_num));
+            String type = req.getParameter("type");
+            if (type == null){
+                Random random = new Random();
+                int r_num = -1;
+                Password password = null;
+                while (password == null) {
+                    //bad style
+                    r_num = random.nextInt(3)+1;
+                    password = user.getPassword(PwType.TypeMapping.get(r_num));
+                }
+                type = PwType.TypeMapping.get(r_num);
             }
+
             req.getSession().setAttribute("user",user);
-            String scheme = password.getCurrentScheme();
-            return "@verify_" + scheme.toLowerCase()+"?type="+PwType.TypeMapping.get(r_num);
+
+            String scheme = (req.getParameter("scheme")==null)?Scheme.OCTAL:req.getParameter("scheme");
+            return "@verify_" + scheme.toLowerCase()+"?type="+type;
         }else {
             //request
             return "@request_octal";
@@ -78,29 +84,35 @@ public class FlowServlet extends BaseController {
      */
     public String changescheme(HttpServletRequest req, HttpServletResponse res) {
         String target = req.getParameter("target");
+        String type = req.getParameter("type");
         String returnul = null;
         int step = Integer.parseInt(req.getSession().getAttribute("nextstep").toString());
+
         if(step >3){
             //verify
-            returnul = "@verify_";
+            returnul = "@flow_next?scheme=";
         }else{
             returnul = "@request_";
         }
         switch (target) {
             case Scheme.BINARY:
                 //to binary
-                returnul+="binary";
+                returnul+=Scheme.BINARY;
                 break;
             case Scheme.IMAGE:
-                returnul+="image";
+                returnul+=Scheme.IMAGE;
                 break;
             case Scheme.OCTAL:
-                returnul+="octal";
+                returnul+=Scheme.OCTAL;
                 break;
             default:
                 return InvalidRequestUrl;
         }
-
+        if(step>3){
+            returnul+=("&type="+type);
+        }else{
+            returnul = returnul.toLowerCase();
+        }
         return returnul;
     }
 
@@ -113,9 +125,11 @@ public class FlowServlet extends BaseController {
      */
     public String end(HttpServletRequest req, HttpServletResponse res) {
         User user = (User) req.getSession().getAttribute("user");
+        req.getSession().removeAttribute("user");
+        req.getSession().removeAttribute("msg");
         req.setAttribute("log", user.getLog());
         //todo
-        return null;
+        return "/";
     }
 
     /**
@@ -135,10 +149,12 @@ public class FlowServlet extends BaseController {
         String password_type = req.getParameter("type");
         Password password = user.getPassword(password_type);
         user.removePassword(password_type);
-        if (password.getPassword_representative().equals(user_password)){
-            return "@flow_next?msg=Correct";
+        if (VerifyPassword.verify(password,user_password)){
+            req.getSession().setAttribute("msg","Correct");
+            return "@flow_confirm";
         }else{
-            return "@flow_next?msg=Wrong";
+            req.getSession().setAttribute("msg","wrong");
+            return "@flow_confirm";
         }
     }
 
