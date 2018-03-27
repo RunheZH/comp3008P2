@@ -11,18 +11,18 @@
                 $("#link").attr("href","/verify_image?type=${type}&imagens=${imagens}&password=${current_password}"+convertchar($(this).attr("id").substr(0,1))+$(this).attr("id").substr(2,1));
                 </c:if>
                 <c:if test="${image_size == 8}">
-                $("#input_password").text("${current_password}"+(parseInt($(this).attr("id").substr(0,1))+parseInt($(this).attr("id").substr(2,1))));
-                $("#link").attr("href","/verify_image?type=${type}&imagens=${imagens}&password=${current_password}"+(parseInt($(this).attr("id").substr(0,1))+parseInt($(this).attr("id").substr(2,1))));
+                $("#input_password").text("${current_password}"+((parseInt($(this).attr("id").substr(0,1))-1)*4+parseInt($(this).attr("id").substr(2,1))));
+                $("#link").attr("href","/verify_image?type=${type}&imagens=${imagens}&password=${current_password}"+((parseInt($(this).attr("id").substr(0,1))-1)*4+parseInt($(this).attr("id").substr(2,1))));
                 </c:if>
             })
         })
         function convertchar(num_s) {
-            return String.fromCharCode(66+parseInt(num_s));
+            return String.fromCharCode(64+parseInt(num_s));
         }
     </script>
     <style>
         .highlighted {
-            border: red solid 3px;
+            border: red solid 8px;
         }
     </style>
     <div id = "image_area">

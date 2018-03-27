@@ -123,8 +123,8 @@ public class PasswordRequest extends BaseController {
             Logger.writeLog(user,"REMEMBER",Integer.toString(image_current_step),"");
             assert  password !=null;
             String password_s = Integer.toString(password.getPassword());
-            row = Integer.toString((password_s.charAt(6)-48)/4 +1);
-            col = Integer.toString((password_s.charAt(6)-48)%4);
+            row = Integer.toString((password_s.charAt(6)-48)/5 +1);
+            col = Integer.toString((password_s.charAt(6)-48)>4?(password_s.charAt(6)-48)-4:(password_s.charAt(6)-48));
             image_size = 8;
         }else if(image_current_step == 5){
             return "@flow_confirm";
