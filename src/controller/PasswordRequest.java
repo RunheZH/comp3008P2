@@ -4,6 +4,7 @@ import bean.Password;
 import bean.PwType;
 import bean.Scheme;
 import bean.User;
+import util.Logger;
 import util.PasswordConvertor;
 import util.RandomNumberGenerator;
 
@@ -20,9 +21,9 @@ public class PasswordRequest extends BaseController {
     3->binary
      */
     public String octal(HttpServletRequest req, HttpServletResponse res) {
-
         User user  = (User) req.getSession().getAttribute("user");
         int step = Integer.parseInt(req.getSession().getAttribute("nextstep").toString());
+
         Password password = null;
         if(user.getPassword(PwType.TypeMapping.get(step))!=null){
             //not the first time on this password
@@ -52,6 +53,7 @@ public class PasswordRequest extends BaseController {
             user.addPassword(pwType,password);
         }
         //add user to session
+        Logger.writeLog(user,"SETSCHEME",Scheme.OCTAL,PwType.TypeMapping.get(step));
         req.getSession().setAttribute("user",user);
         req.setAttribute("password",password.getPassword_representative());
         req.setAttribute("scheme",1);
@@ -63,6 +65,7 @@ public class PasswordRequest extends BaseController {
         //todo
         User user = (User) req.getSession().getAttribute("user");
         int step = Integer.parseInt(req.getSession().getAttribute("nextstep").toString());
+        Logger.writeLog(user,"SETSCHEME",Scheme.IMAGE,PwType.TypeMapping.get(step));
         Password password = user.getPassword(PwType.TypeMapping.get(step));
         //image next step
         //if the param does not exist -> step = 1
@@ -90,6 +93,7 @@ public class PasswordRequest extends BaseController {
          * goto next Type
          */
         if(image_current_step == 1){
+            Logger.writeLog(user,"REMEMBER",Integer.toString(image_current_step),"");
             //password initial
             if(password==null){
                 return InvalidRequestUrl;
@@ -101,15 +105,13 @@ public class PasswordRequest extends BaseController {
             //
             String password_s = Integer.toString(password.getPassword());
 
-
-
-
             row = Character.toString(password_s.charAt(0));
             col = Character.toString(password_s.charAt(1));
             image_size = 64;
 
 
         }else if (image_current_step < 4){
+            Logger.writeLog(user,"REMEMBER",Integer.toString(image_current_step),"");
             assert password != null;
             image_size = 64;
             String password_s = Integer.toString(password.getPassword());
@@ -118,10 +120,11 @@ public class PasswordRequest extends BaseController {
 
 
         }else if (image_current_step == 4){
+            Logger.writeLog(user,"REMEMBER",Integer.toString(image_current_step),"");
             assert  password !=null;
             String password_s = Integer.toString(password.getPassword());
-            row = Integer.toString((password_s.charAt(6)-48)/4 +1);
-            col = Integer.toString((password_s.charAt(6)-48)%4);
+            row = Integer.toString((password_s.charAt(6)-48)/5 +1);
+            col = Integer.toString((password_s.charAt(6)-48)>4?(password_s.charAt(6)-48)-4:(password_s.charAt(6)-48));
             image_size = 8;
         }else if(image_current_step == 5){
             return "@flow_confirm";
@@ -138,6 +141,7 @@ public class PasswordRequest extends BaseController {
     public String binary(HttpServletRequest req, HttpServletResponse res) {
         User user = (User) req.getSession().getAttribute("user");
         int step = Integer.parseInt(req.getSession().getAttribute("nextstep").toString());
+        Logger.writeLog(user,"SETSCHEME",Scheme.BINARY,PwType.TypeMapping.get(step));
         Password password = user.getPassword(PwType.TypeMapping.get(step));
         password = PasswordConvertor.convertPasswordTo(password,Scheme.BINARY);
         user.addPassword(PwType.TypeMapping.get(step),password);

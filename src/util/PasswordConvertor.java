@@ -21,13 +21,14 @@ public class PasswordConvertor {
                 char target = curr_rep.charAt(i);
 
                 switch (target){
-                    case '0': updated_rep.setCharAt(i,'A');
-                    case '1': updated_rep.setCharAt(i,'B');
-                    case '2': updated_rep.setCharAt(i,'C');
-                    case '3': updated_rep.setCharAt(i,'D');
-                    case '4': updated_rep.setCharAt(i,'E');
-                    case '5': updated_rep.setCharAt(i,'F');
-                    case '6': updated_rep.setCharAt(i,'G');
+                    case '1': updated_rep.setCharAt(i,'A');
+                    case '2': updated_rep.setCharAt(i,'B');
+                    case '3': updated_rep.setCharAt(i,'C');
+                    case '4': updated_rep.setCharAt(i,'D');
+                    case '5': updated_rep.setCharAt(i,'E');
+                    case '6': updated_rep.setCharAt(i,'F');
+                    case '7': updated_rep.setCharAt(i,'G');
+                    case '8': updated_rep.setCharAt(i,'H');
 
                 }
             }

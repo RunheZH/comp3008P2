@@ -8,7 +8,7 @@
 </script>
 <style>
     .highlighted {
-        border: red solid 3px;
+        border: red solid 8px;
     }
 </style>
 

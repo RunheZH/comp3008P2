@@ -4,6 +4,7 @@ import bean.Password;
 import bean.PwType;
 import bean.Scheme;
 import bean.User;
+import util.Logger;
 import util.VerifyPassword;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ public class FlowServlet extends BaseController {
      */
     public String start(HttpServletRequest req, HttpServletResponse res) {
         //initial user data
+        Logger.writeLog((User)req.getSession().getAttribute("user"),"START","","");
         req.getSession().setAttribute("nextstep", 1);
         return "@request_octal";
     }
@@ -32,6 +34,7 @@ public class FlowServlet extends BaseController {
      * @return
      */
     public String confirm(HttpServletRequest req, HttpServletResponse res) {
+        Logger.writeLog((User)req.getSession().getAttribute("user"),"CONFIRM","","");
         int step = Integer.parseInt(req.getSession().getAttribute("nextstep").toString());
         req.getSession().setAttribute("nextstep", ++step);
         return "@flow_next";
@@ -48,6 +51,7 @@ public class FlowServlet extends BaseController {
         Integer step = Integer.parseInt(req.getSession().getAttribute("nextstep").toString());
         //todo
         if(step == 7) {
+            Logger.writeLog((User)req.getSession().getAttribute("user"),"FINISH","","");
             return "@flow_end";
         }else if (step > 3) {
             //verify
@@ -71,6 +75,7 @@ public class FlowServlet extends BaseController {
             return "@verify_" + scheme.toLowerCase()+"?type="+type;
         }else {
             //request
+            Logger.writeLog((User)req.getSession().getAttribute("user"),"REQUESTPASS","","");
             return "@request_octal";
         }
     }
@@ -128,8 +133,8 @@ public class FlowServlet extends BaseController {
         req.getSession().removeAttribute("user");
         req.getSession().removeAttribute("msg");
         req.setAttribute("log", user.getLog());
-        //todo
-        return "/";
+        Logger.writeLog(user,"FINISH","","");
+        return "/index.jsp";
     }
 
     /**
@@ -151,11 +156,13 @@ public class FlowServlet extends BaseController {
         user.removePassword(password_type);
         if (VerifyPassword.verify(password,user_password)){
             req.getSession().setAttribute("msg","Correct");
-            return "@flow_confirm";
+            Logger.writeLog(user,"RESULT","SUCCESS","");
         }else{
             req.getSession().setAttribute("msg","wrong");
-            return "@flow_confirm";
+            Logger.writeLog(user,"RESULT","Fail","");
+
         }
+        return "@flow_confirm";
     }
 
 }
