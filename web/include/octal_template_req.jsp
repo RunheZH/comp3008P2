@@ -125,7 +125,8 @@
         if (data === '${password}') {
             $("#input_box").val('');
             $("#input_length").text($("#input_box").val().length);
-            alert("Your password is correct");
+            preSize = 0;
+            alert("Your password is correct. You can try again to remember the password.");
 
         } else {
             alert("Your password is wrong");
