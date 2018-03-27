@@ -1,6 +1,7 @@
 package util;
 
 import bean.Password;
+import bean.Scheme;
 
 
 public class VerifyPassword {
@@ -19,8 +20,8 @@ public class VerifyPassword {
         Password binary_pwd = password;
 
         String octal_rep = Integer.toString(password.getPassword());
-        String image_rep = PasswordConvertor.convertPasswordTo(image_pwd, "IMAGE").getPassword_representative();
-        String binary_rep = PasswordConvertor.convertPasswordTo(binary_pwd, "BINARY").getPassword_representative();
+        String image_rep = PasswordConvertor.convertPasswordTo(image_pwd, Scheme.IMAGE).getPassword_representative();
+        String binary_rep = PasswordConvertor.convertPasswordTo(binary_pwd, Scheme.BINARY).getPassword_representative();
 
         if (user_input.equals(octal_rep) || user_input.equals(image_rep) || user_input.equals(binary_rep) ){ return true;}
 

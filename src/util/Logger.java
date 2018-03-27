@@ -14,7 +14,7 @@ import bean.User;
 public class Logger {
     private static FileWriter writer;
     private static BufferedWriter bf_writer;
-    private static final String FILEPATH = "/Users/chenjunhao/Documents/GitHub/comp3008P2/Logging.txt";
+    private static final String FILEPATH = "/home/largetimmo/Logging.txt";
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     //format: "time","userid","scheme","password type","action","something else"
     public static synchronized void writeLog(User user, String action, String data1,String data2){

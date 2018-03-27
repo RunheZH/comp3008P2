@@ -22,7 +22,7 @@ public class BaseFilter implements Filter{
             User user = new User();
             user.setUserid(User.uid++);
             req.getSession().setAttribute("user",user);
-            Logger.writeLog(user,"Login",req.getRemoteUser(),"");
+            Logger.writeLog(user,"Login",req.getRemoteAddr(),"");
 
         }
         String contextpath = req.getContextPath();
