@@ -20,10 +20,6 @@ public abstract class BaseController extends HttpServlet {
             String redirAddr = method.invoke(this, req, res).toString();
 
             //if the uri has msg param(this is for server method redirect)
-            if (req.getParameter("msg") != null) {
-                //only support when uri start with @
-                req.setAttribute("msg", req.getParameter("msg"));
-            }
             if (req.getAttribute("msg") != null) {
                 //only support when uri start with @
                 req.setAttribute("msg", req.getAttribute("msg"));
@@ -41,6 +37,11 @@ public abstract class BaseController extends HttpServlet {
                 res.getWriter().print(StringUtils.substring(redirAddr, 1));
             } else {
                 //client go to another page
+                if(req.getSession().getAttribute("msg")!=null){
+                    //add message to page
+                    req.setAttribute("msg",req.getSession().getAttribute("msg").toString());
+                    req.getSession().removeAttribute("msg");
+                }
                 req.getRequestDispatcher(redirAddr).forward(req, res);
             }
         } catch (Exception e) {

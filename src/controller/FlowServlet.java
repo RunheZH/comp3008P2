@@ -4,6 +4,7 @@ import bean.Password;
 import bean.PwType;
 import bean.Scheme;
 import bean.User;
+import util.Logger;
 import util.VerifyPassword;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ public class FlowServlet extends BaseController {
      */
     public String start(HttpServletRequest req, HttpServletResponse res) {
         //initial user data
+        Logger.writeLog((User)req.getSession().getAttribute("user"),"START","","");
         req.getSession().setAttribute("nextstep", 1);
         return "@request_octal";
     }
@@ -32,6 +34,7 @@ public class FlowServlet extends BaseController {
      * @return
      */
     public String confirm(HttpServletRequest req, HttpServletResponse res) {
+        Logger.writeLog((User)req.getSession().getAttribute("user"),"CONFIRM","","");
         int step = Integer.parseInt(req.getSession().getAttribute("nextstep").toString());
         req.getSession().setAttribute("nextstep", ++step);
         return "@flow_next";
@@ -48,23 +51,31 @@ public class FlowServlet extends BaseController {
         Integer step = Integer.parseInt(req.getSession().getAttribute("nextstep").toString());
         //todo
         if(step == 7) {
+            Logger.writeLog((User)req.getSession().getAttribute("user"),"FINISH","","");
             return "@flow_end";
         }else if (step > 3) {
             //verify
             User user = (User) req.getSession().getAttribute("user");
-            Random random = new Random();
-            int r_num = -1;
-            Password password = null;
-            while (password == null) {
-                //bad style
-                r_num = random.nextInt(3)+1;
-                password = user.getPassword(PwType.TypeMapping.get(r_num));
+            String type = req.getParameter("type");
+            if (type == null){
+                Random random = new Random();
+                int r_num = -1;
+                Password password = null;
+                while (password == null) {
+                    //bad style
+                    r_num = random.nextInt(3)+1;
+                    password = user.getPassword(PwType.TypeMapping.get(r_num));
+                }
+                type = PwType.TypeMapping.get(r_num);
             }
+
             req.getSession().setAttribute("user",user);
-            String scheme = password.getCurrentScheme();
-            return "@verify_" + scheme.toLowerCase()+"?type="+PwType.TypeMapping.get(r_num);
+
+            String scheme = (req.getParameter("scheme")==null)?Scheme.OCTAL:req.getParameter("scheme");
+            return "@verify_" + scheme.toLowerCase()+"?type="+type;
         }else {
             //request
+            Logger.writeLog((User)req.getSession().getAttribute("user"),"REQUESTPASS","","");
             return "@request_octal";
         }
     }
@@ -78,29 +89,35 @@ public class FlowServlet extends BaseController {
      */
     public String changescheme(HttpServletRequest req, HttpServletResponse res) {
         String target = req.getParameter("target");
+        String type = req.getParameter("type");
         String returnul = null;
         int step = Integer.parseInt(req.getSession().getAttribute("nextstep").toString());
+
         if(step >3){
             //verify
-            returnul = "@verify_";
+            returnul = "@flow_next?scheme=";
         }else{
             returnul = "@request_";
         }
         switch (target) {
             case Scheme.BINARY:
                 //to binary
-                returnul+="binary";
+                returnul+=Scheme.BINARY;
                 break;
             case Scheme.IMAGE:
-                returnul+="image";
+                returnul+=Scheme.IMAGE;
                 break;
             case Scheme.OCTAL:
-                returnul+="octal";
+                returnul+=Scheme.OCTAL;
                 break;
             default:
                 return InvalidRequestUrl;
         }
-
+        if(step>3){
+            returnul+=("&type="+type);
+        }else{
+            returnul = returnul.toLowerCase();
+        }
         return returnul;
     }
 
@@ -113,9 +130,11 @@ public class FlowServlet extends BaseController {
      */
     public String end(HttpServletRequest req, HttpServletResponse res) {
         User user = (User) req.getSession().getAttribute("user");
+        req.getSession().removeAttribute("user");
+        req.getSession().removeAttribute("msg");
         req.setAttribute("log", user.getLog());
-        //todo
-        return null;
+        Logger.writeLog(user,"FINISH","","");
+        return "/index.jsp";
     }
 
     /**
@@ -135,11 +154,15 @@ public class FlowServlet extends BaseController {
         String password_type = req.getParameter("type");
         Password password = user.getPassword(password_type);
         user.removePassword(password_type);
-        if (password.getPassword_representative().equals(user_password)){
-            return "@flow_next?msg=Correct";
+        if (VerifyPassword.verify(password,user_password)){
+            req.getSession().setAttribute("msg","Correct");
+            Logger.writeLog(user,"RESULT","SUCCESS","");
         }else{
-            return "@flow_next?msg=Wrong";
+            req.getSession().setAttribute("msg","wrong");
+            Logger.writeLog(user,"RESULT","Fail","");
+
         }
+        return "@flow_confirm";
     }
 
 }
