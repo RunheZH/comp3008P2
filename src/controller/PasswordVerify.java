@@ -1,5 +1,9 @@
 package controller;
 
+import bean.Scheme;
+import bean.User;
+import util.Logger;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -7,6 +11,7 @@ public class PasswordVerify extends BaseController{
     public String octal(HttpServletRequest req, HttpServletResponse res){
         req.setAttribute("scheme",1);
         req.setAttribute("type",req.getParameter("type"));
+        Logger.writeLog((User)req.getSession().getAttribute("user"),"VERIFY", Scheme.OCTAL,req.getParameter("type"));
         return "passwordverify.jsp";
     }
     public String image(HttpServletRequest req, HttpServletResponse res){
@@ -19,6 +24,7 @@ public class PasswordVerify extends BaseController{
         int image_size = 0;
         String row;
         String col;
+        Logger.writeLog((User)req.getSession().getAttribute("user"),"VERIFY", Scheme.IMAGE,req.getParameter("type"));
         if (imagestep_s == null){
             imagens = 1;
             current_password = "";
@@ -44,6 +50,7 @@ public class PasswordVerify extends BaseController{
     public String binary(HttpServletRequest req, HttpServletResponse res){
         req.setAttribute("scheme",3);
         req.setAttribute("type",req.getParameter("type"));
+        Logger.writeLog((User)req.getSession().getAttribute("user"),"VERIFY", Scheme.OCTAL,req.getParameter("type"));
         return "passwordverify.jsp";
     }
 }
