@@ -21,13 +21,14 @@ public class PasswordConvertor {
                 char target = curr_rep.charAt(i);
 
                 switch (target){
-                    case '0': updated_rep.setCharAt(i,'A');
-                    case '1': updated_rep.setCharAt(i,'B');
-                    case '2': updated_rep.setCharAt(i,'C');
-                    case '3': updated_rep.setCharAt(i,'D');
-                    case '4': updated_rep.setCharAt(i,'E');
-                    case '5': updated_rep.setCharAt(i,'F');
-                    case '6': updated_rep.setCharAt(i,'G');
+                    case 49: updated_rep.setCharAt(i,'A');break;
+                    case 50: updated_rep.setCharAt(i,'B');break;
+                    case 51: updated_rep.setCharAt(i,'C');break;
+                    case 52: updated_rep.setCharAt(i,'D');break;
+                    case 53: updated_rep.setCharAt(i,'E');break;
+                    case 54: updated_rep.setCharAt(i,'F');break;
+                    case 55: updated_rep.setCharAt(i,'G');break;
+                    case 56: updated_rep.setCharAt(i,'H');break;
 
                 }
             }
@@ -35,7 +36,11 @@ public class PasswordConvertor {
             original.setPassword_representative(updated_rep.toString());
 
         }else if(target_scheme.equals(Scheme.BINARY)){
-            String new_rep = Integer.toBinaryString(curr_password);
+
+            String new_rep;
+            int binary_pwd = Integer.parseInt(Integer.toString(curr_password), 8);
+            new_rep = Integer.toBinaryString(binary_pwd);
+
             while (new_rep.length()<21){
                 new_rep = "0"+new_rep;
             }
