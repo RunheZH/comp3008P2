@@ -131,10 +131,8 @@ public class FlowServlet extends BaseController {
     public String end(HttpServletRequest req, HttpServletResponse res) {
         User user = (User) req.getSession().getAttribute("user");
         req.getSession().removeAttribute("user");
-        req.getSession().removeAttribute("msg");
-        req.setAttribute("log", user.getLog());
         Logger.writeLog(user,"FINISH","","");
-        return "/index.jsp";
+        return "@flow_index";
     }
 
     /**
@@ -163,6 +161,9 @@ public class FlowServlet extends BaseController {
 
         }
         return "@flow_confirm";
+    }
+    public String index(HttpServletRequest req, HttpServletResponse res){
+        return "/index.jsp";
     }
 
 }
