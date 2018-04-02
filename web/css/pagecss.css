@@ -1,0 +1,20 @@
+.innerinsturction{
+    border: 1px solid #000;
+    width: 70vw;
+    background-color: #B0E0A5;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+}
+.outerinstruction{
+    border: 1px solid #000;
+    width: 70vw;
+    background-color:#FFEEAB;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+}
