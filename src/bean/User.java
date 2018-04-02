@@ -1,5 +1,7 @@
 package bean;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import java.util.*;
 
 public class User {
@@ -7,8 +9,10 @@ public class User {
     private int userid;
     private Hashtable<String,Password> password_list;
     private StringBuffer log;
+    private ArrayList<Pair<String,Password>> random_password_list;
 
     public User() {
+        random_password_list = new ArrayList<>();
         password_list = new Hashtable<>();
         log = new StringBuffer();
     }
@@ -37,6 +41,18 @@ public class User {
         assert password_list.get(pwtype)!=null;
         password_list.remove(pwtype);
     }
+    public void  addToRandomList(Pair<String,Password> data){
+        random_password_list.add(data);
+    }
+
+    public ArrayList<Pair<String, Password>> getRandom_password_list() {
+        return random_password_list;
+    }
+
+    public boolean pwdListIsEmpty(){
+       return password_list.isEmpty();
+    }
+
     @Override
     public String toString() {
         return "User{" +

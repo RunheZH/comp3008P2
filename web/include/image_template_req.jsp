@@ -13,6 +13,7 @@
 </style>
 
 <div>
+    <h2>Step ${imagens - 1} of 4:</h2>
     <div>
         <!-- image_area-->
         <c:if test="${image_size == 64}">

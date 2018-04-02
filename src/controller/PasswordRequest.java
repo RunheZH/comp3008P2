@@ -101,15 +101,11 @@ public class PasswordRequest extends BaseController {
             password = PasswordConvertor.convertPasswordTo(password,Scheme.IMAGE);
             user.addPassword(PwType.TypeMapping.get(step),password);
             req.getSession().setAttribute("user",user);
-
             //
             String password_s = Integer.toString(password.getPassword());
-
             row = Character.toString(password_s.charAt(0));
             col = Character.toString(password_s.charAt(1));
             image_size = 64;
-
-
         }else if (image_current_step < 4){
             Logger.writeLog(user,"REMEMBER",Integer.toString(image_current_step),"");
             assert password != null;
@@ -117,8 +113,6 @@ public class PasswordRequest extends BaseController {
             String password_s = Integer.toString(password.getPassword());
             row = Character.toString(password_s.charAt((image_current_step-1)*2));
             col = Character.toString(password_s.charAt((image_current_step-1)*2+1));
-
-
         }else if (image_current_step == 4){
             Logger.writeLog(user,"REMEMBER",Integer.toString(image_current_step),"");
             assert  password !=null;
@@ -149,7 +143,6 @@ public class PasswordRequest extends BaseController {
         req.setAttribute("scheme",3);
         req.setAttribute("type",PwType.TypeMapping.get(step));
         return "/passwordgen.jsp";
-
     }
 
 }

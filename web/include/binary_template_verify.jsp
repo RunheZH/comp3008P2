@@ -8,7 +8,6 @@
         $("#link").attr("href", "/flow_verify?type=${type}&password="+$("#input_box").val());
     }
 </script>
-<label>Please enter your ${type} password</label>
 <div>
     <label>You may enter this to following box <span><input id="input_box"
                                                             oninput="updatehref();updatelength()" maxlength="21"></span></label>

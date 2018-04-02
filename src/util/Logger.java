@@ -22,8 +22,6 @@ public class Logger {
         System.out.println("\""+sdf.format(date)+"\",\""+ user.getUserid()+"\",\""+action+"\",\""+data1+"\",\""+data2+"\"");
         try {
             bf_writer = new BufferedWriter(new FileWriter(FILEPATH,true));
-
-
             bf_writer.write("\""+sdf.format(date)+"\",\""+ user.getUserid()+"\",\""+action+"\",\""+data1+"\",\""+data2+"\"");
             bf_writer.newLine();
             bf_writer.close();
