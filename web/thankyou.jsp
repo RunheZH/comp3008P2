@@ -14,7 +14,8 @@
 <body>
     <div class="container">
         <h2>Thank you using our system</h2>
-        <a href="/index.jsp">Go to Index</a>
+        <p><a href="https://hotsoft.carleton.ca/comp3008limesurvey/index.php/3804?lang=en">Please participate to our survey </a></p>
+        <p><a href="/index.jsp">Go to Index</a></p>
     </div>
 </body>
 </html>
