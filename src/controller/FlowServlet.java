@@ -25,7 +25,7 @@ public class FlowServlet extends BaseController {
         //initial user data
         Logger.writeLog((User) req.getSession().getAttribute("user"), "START", "", "");
         req.getSession().setAttribute("nextstep", 1);
-        return "@request_octal";
+        return "@flow_next";
     }
 
     /**
@@ -89,7 +89,7 @@ public class FlowServlet extends BaseController {
 
         } else {
             //request
-            Logger.writeLog((User) req.getSession().getAttribute("user"), "REQUESTPASS", "", "");
+            Logger.writeLog((User) req.getSession().getAttribute("user"), "REQUESTPASS", PwType.TypeMapping.get(step), "");
             return "@request_octal";
         }
     }
