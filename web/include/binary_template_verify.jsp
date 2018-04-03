@@ -7,7 +7,7 @@
     }
 </script>
 <div>
-    <label>You may enter this to following box <span><input id="input_box" oninput="updatehref();updatelength()" maxlength="21"></span></label>
+    <label>You may enter this to following box <span><input autocomplete="off" id="input_box" oninput="updatehref();updatelength()" maxlength="21"></span></label>
     <p><label>Your input length:<label id="input_length"></label></label></p>
 
 </div>

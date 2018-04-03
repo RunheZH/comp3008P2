@@ -27,6 +27,7 @@
         <div class="innerinsturction">
             <h2>Current Scheme: Octal</h2>
             <h3>Randomly generated numbers with digits from 1 - 8. You can practice your password in the input box.</h3>
+            <h3>Please turn your volume up, so you can hear music node.</h3>
         </div>
         <%@include file="include/octal_template_req.jsp" %>
     </c:if>
@@ -44,7 +45,7 @@
         <!--binary-->
         <div class="innerinsturction">
             <h2>Current Scheme: Binary</h2>
-            <h3>password in binary representation. passwords are consists of digit 1 and 0, 21 digits in total.</h3>
+            <h3>password in binary representation. passwords consist of digit 1 and 0, 21 digits in total.</h3>
         </div>
         <%@include file="include/binary_template_req.jsp" %>
     </c:if>

@@ -151,7 +151,7 @@
     </script>
     <label>Please enter your ${type} password</label>
     <div>
-        <label>You may enter this to following box <span><input id="input_box"
+        <label>You may enter this to following box <span><input autocomplete="off" id="input_box"
                                                                 oninput="updatehref();playAudio($('#input_box').val())" maxlength="7"></span></label>
         <p><label>Your input length:<label id="input_length"></label></label></p>
 

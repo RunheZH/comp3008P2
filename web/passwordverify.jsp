@@ -27,6 +27,7 @@
         <div class="innerinsturction">
             <h2>Current Scheme: Octal</h2>
             <h3> Enter your password in the input box, you can enter your password once.</h3>
+            <h3>Please turn your volume up, so you can hear music node.</h3>
         </div>
         <%@include file="include/octal_template_verify.jsp" %>
     </c:if>
