@@ -26,7 +26,7 @@
         <!-- octal -->
         <div class="innerinsturction">
             <h2>Current Scheme: Octal</h2>
-            <h3>Random generated numbers with digits from 1 - 8. You can practice your password in the input box.</h3>
+            <h3>Randomly generated numbers with digits from 1 - 8. You can practice your password in the input box.</h3>
         </div>
         <%@include file="include/octal_template_req.jsp" %>
     </c:if>
@@ -34,7 +34,7 @@
         <!-- image-->
         <div class="innerinsturction">
             <h2>Current Scheme: Image</h2>
-            <h3>random generated 4 groups of images, group 1-3 has 64 images and the last group has 8 images.</h3>
+            <h3>Randomly generated 4 groups of images, group 1-3 has 64 images and the last group has 8 images.</h3>
             <h3>In each group, you need to memorize the image bounded by the red square.</h3>
             <h3>For each password you need to memorize 4 images, note that order matters.</h3>
         </div>
