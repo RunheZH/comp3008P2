@@ -149,17 +149,6 @@ public class FlowServlet extends BaseController {
         return "/thankyou.jsp";
     }
 
-    /**
-     * Re-generate a password for user
-     *
-     * @param req
-     * @param res
-     * @return
-     */
-    public String reset(HttpServletRequest req, HttpServletResponse res) {
-        //todo
-        return null;
-    }
 
     public String verify(HttpServletRequest req, HttpServletResponse res) {
         String user_password = req.getParameter("password");
@@ -169,7 +158,7 @@ public class FlowServlet extends BaseController {
         Integer step = Integer.parseInt(req.getSession().getAttribute("nextstep").toString());
         Password password = user.getRandom_password_list().get(step-4).getRight();
         if (VerifyPassword.verify(password, user_password)) {
-            req.getSession().setAttribute("msg", "Correct");
+            req.getSession().setAttribute("msg", "Yeahhhhh!!!! You have entered a correct password");
             req.getSession().removeAttribute("fail_time");
             Logger.writeLog(user, "RESULT", "SUCCESS", "");
         } else {
@@ -180,7 +169,7 @@ public class FlowServlet extends BaseController {
             }
             fail_count++;
             req.getSession().setAttribute("fail_time", fail_count);
-            req.getSession().setAttribute("msg", "wrong");
+            req.getSession().setAttribute("msg", "Sorry. Your password is not correct");
             Logger.writeLog(user, "RESULT", "Fail", "");
         }
         return "@flow_confirm";

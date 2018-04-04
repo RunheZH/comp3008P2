@@ -33,6 +33,13 @@ public class BaseFilter implements Filter{
             String servlet = StringUtils.substringBefore(uri,"_");
             servlet+="Servlet";
             String method = StringUtils.substringAfter(uri,"_");
+            if((!method.equals("start")) && (req.getSession().getAttribute("nextstep") == null)){
+                //user want to access something but the nextstep in his session is null
+                servlet = "flowServlet";
+                method = "start";
+                req.getSession().setAttribute("msg","Invalid attempt.Server encounter an error.");
+            }
+
             req.getSession().setAttribute("invMethod",method);
             req.getRequestDispatcher(servlet).forward(req,res);
             return;
