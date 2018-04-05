@@ -5,7 +5,7 @@ public class Password {
     private int password;
     private String password_representative;
     /**
-     * todo:read here then goto todo#2
+     *
      * Eg.real password -> 1234567, (octal) password_representative->1234567
      *                            , (image) password_representative->A2C4E67
      *                            , (binary) password_representative->10101010101010xxxxxx
