@@ -7,7 +7,6 @@ public class RandomNumberGenerator {
      * @return
      */
     public static int GenerateRandomNumber(){
-        //TODO:
         Random rand = new Random();
         int result = 0;
         int p = 1;
@@ -18,7 +17,6 @@ public class RandomNumberGenerator {
         }
 
         return result;
-        //return -1;
     }
 
 }

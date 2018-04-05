@@ -8,12 +8,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class PasswordVerify extends BaseController{
+    /**
+     * handle user request octal password verify page
+     * @param req
+     * @param res
+     * @return
+     */
     public String octal(HttpServletRequest req, HttpServletResponse res){
         req.setAttribute("scheme",1);
         req.setAttribute("type",req.getParameter("type"));
         Logger.writeLog((User)req.getSession().getAttribute("user"),"VERIFY", Scheme.OCTAL,req.getParameter("type"));
         return "passwordverify.jsp";
     }
+
+    /**
+     * handle user request image password verify page
+     * @param req
+     * @param res
+     * @return
+     */
     public String image(HttpServletRequest req, HttpServletResponse res){
         //todo
         req.setAttribute("type",req.getParameter("type"));
@@ -47,6 +60,13 @@ public class PasswordVerify extends BaseController{
 
         return "passwordverify.jsp";
     }
+
+    /**
+     * handle user request binary password verify page
+     * @param req
+     * @param res
+     * @return
+     */
     public String binary(HttpServletRequest req, HttpServletResponse res){
         req.setAttribute("scheme",3);
         req.setAttribute("type",req.getParameter("type"));

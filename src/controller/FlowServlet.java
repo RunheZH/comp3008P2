@@ -149,7 +149,13 @@ public class FlowServlet extends BaseController {
         return "/thankyou.jsp";
     }
 
-
+    /**
+     * handle user verify request
+     *
+     * @param req
+     * @param res
+     * @return
+     */
     public String verify(HttpServletRequest req, HttpServletResponse res) {
         String user_password = req.getParameter("password");
         User user = (User) req.getSession().getAttribute("user");

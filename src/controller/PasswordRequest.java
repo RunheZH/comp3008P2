@@ -20,6 +20,13 @@ public class PasswordRequest extends BaseController {
     2->image
     3->binary
      */
+
+    /**
+     * handle user request octal password
+     * @param req
+     * @param res
+     * @return
+     */
     public String octal(HttpServletRequest req, HttpServletResponse res) {
         User user  = (User) req.getSession().getAttribute("user");
         int step = Integer.parseInt(req.getSession().getAttribute("nextstep").toString());
@@ -61,6 +68,12 @@ public class PasswordRequest extends BaseController {
         return "/passwordgen.jsp";
     }
 
+    /**
+     * handle user image request
+     * @param req
+     * @param res
+     * @return
+     */
     public String image(HttpServletRequest req, HttpServletResponse res) {
         //todo
         User user = (User) req.getSession().getAttribute("user");
@@ -80,6 +93,7 @@ public class PasswordRequest extends BaseController {
          * Image size 8*8
          * Assign image row and col to request
          * set next step to request
+         *
          * step->2&3
          * Assign image row and col to request
          * Image size: 8*8
@@ -132,6 +146,12 @@ public class PasswordRequest extends BaseController {
         return "/passwordgen.jsp";
     }
 
+    /**
+     * handle user binary request
+     * @param req
+     * @param res
+     * @return
+     */
     public String binary(HttpServletRequest req, HttpServletResponse res) {
         User user = (User) req.getSession().getAttribute("user");
         int step = Integer.parseInt(req.getSession().getAttribute("nextstep").toString());
