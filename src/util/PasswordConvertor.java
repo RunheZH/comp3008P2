@@ -1,4 +1,7 @@
 package util;
+/**
+ * Convert password from octal to binary or image
+ */
 
 import bean.Password;
 import bean.Scheme;

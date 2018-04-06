@@ -4,6 +4,11 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 
+/**
+ * plain old java object
+ * store data
+ */
+
 public class User {
     public static int uid = 1;
     private int userid;

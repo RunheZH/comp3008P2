@@ -1,4 +1,9 @@
 package controller;
+/**
+ *Password verifycation page generator
+ *
+ * Three methods -> three schemes
+ */
 
 import bean.Scheme;
 import bean.User;

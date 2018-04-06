@@ -1,4 +1,12 @@
 package filter;
+/**
+ *
+ * All of the usre request will pass through this class first
+ * This class will check the if the request session have bounded a valid user object or not
+ * if not then create a new one for the session
+ * Then will call different method in different depends on the user request url
+ *
+ */
 
 import bean.User;
 import org.apache.commons.lang3.StringUtils;

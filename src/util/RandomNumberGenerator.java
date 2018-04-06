@@ -1,6 +1,9 @@
 package util;
 import java.util.Random;
 
+/**
+ * Generate random password in octal
+ */
 public class RandomNumberGenerator {
     /**
      * Generate random 7 digit number, each digit range is 1-8

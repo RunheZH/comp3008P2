@@ -3,6 +3,9 @@ package util;
 import bean.Password;
 import bean.Scheme;
 
+/**
+ * Verify password is correct or not
+ */
 
 public class VerifyPassword {
     /**

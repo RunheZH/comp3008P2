@@ -1,4 +1,11 @@
 package controller;
+/**
+ * Main control class
+ *
+ * navigate user from the beginning of the password test to the end
+ *
+ * detail explanation of each method are on the top of each method
+ */
 
 import bean.Password;
 import bean.PwType;
@@ -48,6 +55,8 @@ public class FlowServlet extends BaseController {
 
     /**
      * Main control method
+     *
+     * go to next step
      *
      * @param req
      * @param res

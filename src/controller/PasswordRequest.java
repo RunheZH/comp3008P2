@@ -1,4 +1,9 @@
 package controller;
+/**
+ * Password request page generator
+ *
+ * three method -> three schemes
+ */
 
 import bean.Password;
 import bean.PwType;

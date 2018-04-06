@@ -1,4 +1,9 @@
 package util;
+/**
+ * Logger class
+ *
+ * write log to file
+ */
 
 import java.io.BufferedWriter;
 import java.io.File;

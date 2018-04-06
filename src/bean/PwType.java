@@ -1,5 +1,9 @@
 package bean;
-
+/**
+ * plain old java object
+ * store data
+ * declare password types
+ */
 import java.util.HashMap;
 import java.util.Map;
 

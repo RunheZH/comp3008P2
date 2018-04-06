@@ -1,4 +1,11 @@
 package controller;
+/**
+ * The base class of all controller classes
+ *
+ * Once the method in controller classes has been invoked in the BaseFilter class
+ *this class will handle the return value of the invoked method
+ * and process the message that should be printed on the screen
+ */
 
 import org.apache.commons.lang3.StringUtils;
 

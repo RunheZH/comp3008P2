@@ -1,5 +1,9 @@
 package bean;
 
+/**
+ * plain old java object
+ * store data
+ */
 public class Password {
     private String currentScheme;
     private int password;
