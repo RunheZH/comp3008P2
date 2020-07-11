@@ -1,7 +1,19 @@
-# comp3008P2 
+# comp3008P2 - 2018 Winter
 
-Available at http://largetimmo.me:8081
-# Installation and Running Instructions:
+~Available at http://largetimmo.me:8081~ (Updated: July 11, 2020)
+
+## Group members
+Junhao Chen
+
+Xiyi Liu
+
+Guanhong Wu
+
+Runhe Zhong
+
+Xiang Zuo
+
+## Installation and Running Instructions:
 
 1.Download tomcat(Version 8 or above)
 
